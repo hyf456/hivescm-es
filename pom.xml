@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hivescm</groupId>
+    <artifactId>hivescm-es</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>hivescm-es-common</module>
+        <module>hivescm-es-feign</module>
+        <module>hivescm-es-search</module>
+    </modules>
+
+    <!-- spring boot parent pom  -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.2.RELEASE</version>
+    </parent>
+
+    <properties>
+        <!-- Explicitly declaring the source encoding eliminates the following
+            message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
+            resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.spring-boot-starter>1.5.2.RELEASE</version.spring-boot-starter>
+        <!-- logcenter versions -->
+        <version.logcenter-common>1.0.0-GA</version.logcenter-common>
+        <version.logcenter-server>1.0.0-GA</version.logcenter-server>
+        <version.logcenter-storm>1.0.0-GA</version.logcenter-storm>
+        <version.logcenter-persistence>1.0.0-GA</version.logcenter-persistence>
+        <version.logcenter-client>1.0.0-GA</version.logcenter-client>
+        <!-- configcenter versions -->
+        <version.disconf-client>2.6.36</version.disconf-client>
+        <!-- tsharding-client-springboot versions -->
+        <version.tsharding-springboot>1.0.0-SNAPSHOT</version.tsharding-springboot>
+        <!-- opencache versions -->
+        <version.open-cache>1.0-SNAPSHOT</version.open-cache>
+        <!-- cas client version -->
+        <cas.client.version>3.4.1</cas.client.version>
+        <!-- archaius-core version -->
+        <archaius-core.version>0.7.5</archaius-core.version>
+        <!-- spring-cloud-starter-eureka version -->
+        <spring-cloud-starter-eureka.version>1.3.0.RELEASE</spring-cloud-starter-eureka.version>
+        <!-- spring-cloud-starter-ribbon version -->
+        <spring-cloud-starter-ribbon.version>1.3.0.RELEASE</spring-cloud-starter-ribbon.version>
+        <!-- maven-source-plugin version -->
+        <maven-source-plugin.version>2.2</maven-source-plugin.version>
+        <!-- open common -->
+        <version-open-common>1.0-SNAPSHOT</version-open-common>
+        <!-- generatedId-api -->
+        <version-generatedId-api>1.0.0-SNAPSHOT</version-generatedId-api>
+        <version.spring-cloud-starter-feign>1.3.0.RELEASE</version.spring-cloud-starter-feign>
+        <!-- rocket mq -->
+        <version.rocketmq>1.0-SNAPSHOT</version.rocketmq>
+        <!-- springfox-swagger -->
+        <version-springfox-swagger>2.6.1</version-springfox-swagger>
+        <!-- zookeeper version -->
+        <version-zookeeper>3.4.10</version-zookeeper>
+        <!-- spring cloud starter -->
+        <version-spring-cloud-starter>1.2.0.RELEASE</version-spring-cloud-starter>
+        <java.version>1.8</java.version>
+        <tsharding-version>2.1.1-SNAPSHOT</tsharding-version>
+        <slf4j-api.version>1.7.25</slf4j-api.version>
+        <scm-framework>0.1.1-SNAPSHOT</scm-framework>
+        <swagger2.version>2.7.0</swagger2.version>
+        <lombok.version>1.16.18</lombok.version>
+    </properties>
+    <!-- 依赖管理 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jul-to-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hivescm.open</groupId>
+            <artifactId>open_common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <!--JMX监控-->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-client</artifactId>
+            <version>${version.disconf-client}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derby</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>apache-log4j-extras</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 整合需要指定curator-framework和curator-recipes版本，否则会出现冲突 -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>2.10.0</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>netty</artifactId>
+                        <groupId>io.netty</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>2.10.0</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>netty</artifactId>
+                        <groupId>io.netty</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+            </dependency>
+            <!--json工具 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.32</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hivescm</groupId>
+                <artifactId>open-file-utils</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+            <!--<version>${slf4j-api.version}</version>-->
+            <!--</dependency>-->
+            <!--&lt;!&ndash;&lt;!&ndash; slf4j 简单实现 &ndash;&gt;&ndash;&gt;-->
+            <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-simple</artifactId>-->
+            <!--<version>${slf4j-api.version}</version>-->
+            <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--项目启动时间监控组件-->
+            <dependency>
+                <groupId>com.hivescm</groupId>
+                <artifactId>health-indicators-monitor</artifactId>
+                <version>1.1-SNAPSHOT</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <package.environment>local</package.environment>
+            </properties>
+            <activation>
+                <!-- 默认激活这个配置 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <package.environment>test</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 预发版环境 -->
+            <id>prepare</id>
+            <properties>
+                <package.environment>prepare</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>product</id>
+            <properties>
+                <package.environment>product</package.environment>
+            </properties>
+        </profile>
+    </profiles>
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <!-- 主资源目录 -->
+        <resources>
+            <resource>
+                <!-- 设置主资源目录 -->
+                <directory>src/main/resources</directory>
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 -->
+                <filtering>true</filtering>
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型 -->
+                <!-- 包括文件 -->
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.html</include>
+                    <include>**/*.json</include>
+                    <include>**/*.yml</include>
+                </includes>
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，不处理如下配置中包含的资源类型（剔除下如下配置中包含的资源类型） -->
+                <!-- 排除文件，这些文件打包的时候应该被排除 -->
+                <excludes>
+                    <exclude>config/**/*.properties</exclude>
+                    <exclude>config/**/*.xml</exclude>
+                    <exclude>config/**/*.html</exclude>
+                    <exclude>config/**/*.json</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <repositories>
+
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-snapshot</id>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus_public</id>
+            <url>http://nexus.hivescm.com:8081/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>public</id>
+            <url>http://nexus.hivescm.com:8081/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshot</id>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Nexus Repository</name>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+
+        <snapshotRepository>
+            <id>nexus-snapshot</id>
+            <name>repo-snapshot</name>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-release</id>
+            <name>repo-release</name>
+            <url>http://nexus.hivescm.com:8081/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+
+</project>

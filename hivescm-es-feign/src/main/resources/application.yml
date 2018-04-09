@@ -1,0 +1,15 @@
+#应用名称
+spring:
+  application:
+    name: esfeign
+#服务端口
+server:
+  port: 9999
+
+#注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.12.31.114:8085/eureka-server/eureka/,http://10.12.31.114:8086/eureka-server/eureka/
+  instance:
+    prefer-ip-address: true

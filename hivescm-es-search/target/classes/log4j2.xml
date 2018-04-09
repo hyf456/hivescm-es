@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" packages="com.weidian.open.log.tps">
+    <Properties>
+        <Property name="base.dir">../springcloud</Property>
+        <Property name="pattern">
+            requestTime:%d|traceID:$${ctx:traceID}|SERVER_IP:$${ctx:SERVER_IP}|PROJECT_NAME:$${ctx:PROJECT_NAME}|USER_IP:$${ctx:USER_IP}|%m%n
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <!-- auditTrail -->
+        <RollingFile name="auditTrailAppender" fileName="${base.dir}/auditTrail.log"
+                     filePattern="${base.dir}/auditTrail.log.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="1024 MB"/>
+            </Policies>
+        </RollingFile>
+        <!-- root日志 -->
+        <RollingFile name="rootAppender" fileName="${base.dir}/root.log" filePattern="${base.dir}/root_1.log">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1G"/>
+            </Policies>
+        </RollingFile>
+        <!-- 错误日志 -->
+        <RollingFile name="errorAppender" fileName="${base.dir}/error.log" filePattern="${base.dir}/error_1.log">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1024 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <!-- default log -->
+        <Root level="debug">
+            <AppenderRef ref="rootAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+        <!-- 异常日志 -->
+        <!--<Logger name="com.hivescm.common.exception.DefaultExceptionHandler" level="INFO" additivity="true">-->
+            <!--<AppenderRef ref="errorAppender"/>-->
+        <!--</Logger>-->
+        <!-- web访问日志 -->
+        <!--<Logger name="com.hivescm.common.filter.WebAccessFilter" level="INFO" additivity="true">-->
+            <!--<AppenderRef ref="auditTrailAppender"/>-->
+        <!--</Logger>-->
+    </Loggers>
+</Configuration>
