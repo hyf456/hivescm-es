@@ -9,18 +9,15 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>hivescm-es-common</module>
-        <module>hivescm-es-feign</module>
-        <module>hivescm-es-search</module>
+        <module>hivescm-es-service</module>
+        <module>hivescm-es-api</module>
     </modules>
-
     <!-- spring boot parent pom  -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.2.RELEASE</version>
     </parent>
-
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following
             message: -->

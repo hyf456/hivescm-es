@@ -1,0 +1,7 @@
+com\hivescm\es\start\config\SwaggerConfig.class
+com\hivescm\es\common\VssGoodsSaleParam.class
+com\hivescm\es\common\VssNestedScritpUpdateParam.class
+com\hivescm\es\common\SaveESParam.class
+com\hivescm\es\start\Application.class
+com\hivescm\es\common\BatchSaveESParam.class
+com\hivescm\es\api\util\UtilObject.class
